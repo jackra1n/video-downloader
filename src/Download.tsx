@@ -3,7 +3,9 @@ import { Input } from "@/components/ui/input"
 function Download() {
 
   return (
-    <Input placeholder="URL" />
+    <div>
+      <Input type="url" placeholder="URL" />
+    </div>
   )
 }
 

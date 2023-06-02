@@ -1,10 +1,8 @@
-import "./Header.css"
-
 function Header() {
 
   return (
-    <header className="header">
-        <h1>Video Downloader</h1>
+    <header className="top-0 p-4 flex justify-center">
+      <h1 className="text-2xl">Video Downloader</h1>
     </header>
   )
 }
