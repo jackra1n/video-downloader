@@ -1,6 +1,6 @@
 
 const express = require('express');
-const ytdl = require('ytdl-core')
+const youtubedl = require('youtube-dl-exec')
 
 const app = express();
 
@@ -9,15 +9,17 @@ app.get("/download", async (req, res) => {
 		res.send("No url query parameter provided");
 		return;	
 	}
-	const v_id = req.query.url.split('v=')[1];
-    const info = await ytdl.getInfo(req.query.url);
-	console.log(info);
-	console.log(info.formats);
-	res.send({
-        info: info.formats.sort((a, b) => {
-            return a.mimeType < b.mimeType;
-        }),
-	});
+	youtubedl(req.query.url, {
+		dumpSingleJson: true,
+		noCheckCertificates: true,
+		noWarnings: true,
+		preferFreeFormats: true,
+		addHeader: [
+		'referer:youtube.com',
+		'user-agent:googlebot'
+		]
+	
+	}).then(output => console.log(output))
 });
 
 app.get('/files', (req, res) => {
