@@ -24,6 +24,20 @@ app.get("/download", async (req: Request, res: Response) => {
 	}).then(output => { res.send("finished downloading")});
 });
 
+app.get('/file', (req: Request, res: Response) => {
+	if (req.query.name == null) {
+		res.send("No name query parameter provided");
+		return;
+	}
+	const file = path.join(__dirname, '../videos', req.query.name.toString());
+	console.log(file);
+	try {
+		res.sendFile(file);
+	} catch (err) {
+		res.send(err);
+	}
+});
+
 app.get('/files', (req: Request, res: Response) => {
 	let files = fs.readdirSync(path.join(__dirname, '../videos'));
 	res.send(files);
