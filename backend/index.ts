@@ -15,6 +15,7 @@ app.get("/download", async (req: Request, res: Response) => {
 	youtubedl(req.query.url.toString(), {
 		noWarnings: true,
 		preferFreeFormats: true,
+		writeThumbnail: true,
 		format: 'mp4',
 		output: 'videos/%(title)s-%(id)s.%(ext)s',
 		addHeader: [
